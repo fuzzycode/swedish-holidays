@@ -34,7 +34,44 @@
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'calendar)
+  (require 'holidays))
 
+(defvar swedish-holidays
+  '((holiday-fixed 1 1 "Nyårsdagen")
+    (holiday-fixed 1 6 "Trettondedag Jul")
+    (holiday-fixed 5 1 "Första Maj")
+
+    (holiday-easter-etc -2 "Långfredagen")
+    (holiday-easter-etc 0 "Påskdagen")
+    (holiday-easter-etc 1 "Annandag Påsk")
+    (holiday-easter-etc 39 "Kristi Himmelfärdsdagen")
+    (holiday-easter-etc 49 "Pingstdagen")
+
+    (holiday-fixed 6 6 "Sveriges Nationaldag")
+    (holiday-fixed 12 24 "Julafton")
+    (holiday-fixed 12 25 "Juldagen")
+    (holiday-fixed 12 26 "Annandag Jul")
+    (holiday-fixed 12 31 "Nyårsafton"))
+  "Official holidays in Sweden.")
+
+(defvar swedish-holidays-extras
+  '((holiday-fixed 1 5 "Trettondagsafton")
+
+    (holiday-easter-etc -1 "Påskafton")
+    (holiday-easter-etc 48 "Pingstafton")
+
+    (holiday-fixed 4 30 "Valborgsmässoafton"))
+  "Extra holidays in Sweden.")
+
+(defvar swedish-holidays-misc
+  '((holiday-float 12 0 -4 "Första advent" 24)
+    (holiday-float 12 0 -3 "Andra advent" 24)
+    (holiday-float 12 0 -2 "Tredje advent" 24)
+    (holiday-float 12 0 -1 "Fjärde advent" 24)
+    (holiday-fixed 12 13 "Lucia"))
+  "Extra days of interest in the Swedish calendar.")
 
 (provide 'swedish-holidays)
 ;;; swedish-holidays.el ends here
