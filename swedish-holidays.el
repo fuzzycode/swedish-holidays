@@ -119,6 +119,9 @@ This is a localized re-implementation of 'solar-sunrise-sunset-string`."
 (defun swedish-holidays-setup ()
   "Setup Swedish localization for common date names and formats."
 
+  ;; Use localized version of sunrise/sunset name string function
+  (advice-add 'solar-sunrise-sunset-string :override #'swedish-holidays-solar-sunrise-sunset-string-a)
+
   (setq calendar-holidays (append swedish-holidays swedish-holidays-extras swedish-holidays-misc))
 
   ;; Start the week on Monday
