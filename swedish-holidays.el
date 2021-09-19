@@ -93,5 +93,38 @@ Negative numbers will return days before midsummer."
                       6 (calendar-absolute-from-gregorian
                          (list 6 26 displayed-year)))))
     (list (list (calendar-gregorian-from-absolute (+ midsommar-d n)) name))))
+
+;;;###autoload
+(defun swedish-holidays-setup ()
+  "Setup Swedish localization for common date names and formats."
+
+  (setq calendar-holidays (append swedish-holidays swedish-holidays-extras swedish-holidays-misc))
+
+  ;; Start the week on Monday
+  (setq calendar-week-start-day 1)
+
+  (setq calendar-date-style 'european)
+
+  (setq calendar-date-display-form
+        '((if dayname
+              (concat dayname ", "))
+          day " " monthname " " year))
+
+  (setq calendar-time-display-form
+        '(24-hours ":" minutes))
+
+  (setq calendar-day-name-array
+        ["söndag" "måndag" "tisdag" "onsdag" "torsdag" "fredag" "lördag"]
+        calendar-day-abbrev-array
+        ["sön" "mån" "tis" "ons" "tors" "fre" "lör"]
+        calendar-day-header-array
+        ["sö" "må" "ti" "on" "to" "fr" "lö"])
+  (setq calendar-month-name-array
+        ["januari" "februari" "mars" "april" "maj" "juni"
+         "juli" "augusti" "september" "oktober" "november" "december"]
+        calendar-month-abbrev-array
+        ["jan" "feb" "mar" "apr" "maj" "jun"
+         "jul" "aug" "sep" "okt" "nov" "dec"]))
+
 (provide 'swedish-holidays)
 ;;; swedish-holidays.el ends here
