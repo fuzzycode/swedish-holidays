@@ -51,6 +51,7 @@
     (holiday-easter-etc 49 "Pingstdagen")
 
     (holiday-fixed 6 6 "Sveriges Nationaldag")
+    (swedish-holidays-midsummer-nth 0 "Midsommardagen")
     (holiday-fixed 12 24 "Julafton")
     (holiday-fixed 12 25 "Juldagen")
     (holiday-fixed 12 26 "Annandag Jul")
@@ -63,6 +64,8 @@
 
     (holiday-easter-etc -1 "Påskafton")
     (holiday-easter-etc 48 "Pingstafton")
+
+    (swedish-holidays-midsummer-nth -1 "Midsommarafton")
 
     (holiday-fixed 4 30 "Valborgsmässoafton"))
   "Extra holidays in Sweden.")
@@ -83,5 +86,12 @@
     (holiday-fixed 12 13 "Lucia"))
   "Extra days of interest in the Swedish calendar.")
 
+(defun swedish-holidays-midsummer-nth (n name)
+  "Date of Nth day after Swedish midsummer named NAME.
+Negative numbers will return days before midsummer."
+  (let ((midsommar-d (calendar-dayname-on-or-before
+                      6 (calendar-absolute-from-gregorian
+                         (list 6 26 displayed-year)))))
+    (list (list (calendar-gregorian-from-absolute (+ midsommar-d n)) name))))
 (provide 'swedish-holidays)
 ;;; swedish-holidays.el ends here
