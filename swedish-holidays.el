@@ -69,10 +69,17 @@
 
 ;;;###autoload
 (defvar swedish-holidays-misc
-  '((holiday-float 12 0 -4 "Första advent" 24)
+  '((holiday-fixed 1 13 "Tjugondag Knut")
+    (holiday-float 5 0 -1 "Mors dag")
+    (holiday-float 11 0 2 "Fars dag")
+    (holiday-fixed 2 14 "Alla hjärtans dag")
+    (holiday-easter-etc -47 "Fettisdagen")
+    (holiday-fixed 10 24 "FN-dagen")
+    (holiday-float 12 0 -4 "Första advent" 24)
     (holiday-float 12 0 -3 "Andra advent" 24)
     (holiday-float 12 0 -2 "Tredje advent" 24)
     (holiday-float 12 0 -1 "Fjärde advent" 24)
+    (holiday-fixed 12 10 "Nobeldagen")
     (holiday-fixed 12 13 "Lucia"))
   "Extra days of interest in the Swedish calendar.")
 
