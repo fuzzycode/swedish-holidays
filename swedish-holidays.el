@@ -96,6 +96,25 @@ Negative numbers will return days before midsummer."
                          (list 6 26 displayed-year)))))
     (list (list (calendar-gregorian-from-absolute (+ midsommar-d n)) name))))
 
+
+(defun swedish-holidays-solar-sunrise-sunset-string-a (date &optional nolocation)
+"String of *local* times of sunrise, sunset, and daylight on Gregorian DATE.
+Optional NOLOCATION non-nil means do not print the location.
+
+This is a localized re-implementation of 'solar-sunrise-sunset-string`."
+  (let ((l (solar-sunrise-sunset date)))
+    (format
+     "%s, %s%s (%s timmar dagsljus)"
+     (if (car l)
+         (concat "Sol upp " (apply #'solar-time-string (car l)))
+       "Ingen soluppgång")
+     (if (cadr l)
+         (concat "Sol ned " (apply #'solar-time-string (cadr l)))
+       "Ingen solnedgång")
+     (if nolocation ""
+       (format " vid %s" (eval calendar-location-name)))
+     (nth 2 l))))
+
 ;;;###autoload
 (defun swedish-holidays-setup ()
   "Setup Swedish localization for common date names and formats."
