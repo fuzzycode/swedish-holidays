@@ -154,5 +154,10 @@ This is a localized re-implementation of 'solar-sunrise-sunset-string`."
         ["jan" "feb" "mar" "apr" "maj" "jun"
          "jul" "aug" "sep" "okt" "nov" "dec"]))
 
+;;;###autoload
+(defun swedish-holidays-disable ()
+  "Remove any advice installed by this package."
+  (advice-remove 'solar-sunrise-sunset-string #'swedish-holidays-solar-sunrise-sunset-string-a))
+
 (provide 'swedish-holidays)
 ;;; swedish-holidays.el ends here
