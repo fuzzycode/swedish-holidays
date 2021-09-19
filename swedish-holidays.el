@@ -36,6 +36,7 @@
 
 (eval-when-compile
   (require 'lunar)
+  (require 'solar)
   (require 'calendar)
   (require 'holidays))
 
@@ -115,6 +116,9 @@ Negative numbers will return days before midsummer."
         '(24-hours ":" minutes))
 
   (setq lunar-phase-names '("Nymåne" "Växande halvmåne" "Fullmåne" "Avtagande halvmåne"))
+
+  (setq solar-n-hemi-seasons '("Vårdagjämningen" "Sommarsolståndet" "Höstdagjämningen" "Vintersolståndet"))
+
   (setq calendar-day-name-array
         ["söndag" "måndag" "tisdag" "onsdag" "torsdag" "fredag" "lördag"]
         calendar-day-abbrev-array
