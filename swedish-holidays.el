@@ -38,6 +38,7 @@
   (require 'calendar)
   (require 'holidays))
 
+;;;###autoload
 (defvar swedish-holidays
   '((holiday-fixed 1 1 "Nyårsdagen")
     (holiday-fixed 1 6 "Trettondedag Jul")
@@ -56,6 +57,7 @@
     (holiday-fixed 12 31 "Nyårsafton"))
   "Official holidays in Sweden.")
 
+;;;###autoload
 (defvar swedish-holidays-extras
   '((holiday-fixed 1 5 "Trettondagsafton")
 
@@ -65,6 +67,7 @@
     (holiday-fixed 4 30 "Valborgsmässoafton"))
   "Extra holidays in Sweden.")
 
+;;;###autoload
 (defvar swedish-holidays-misc
   '((holiday-float 12 0 -4 "Första advent" 24)
     (holiday-float 12 0 -3 "Andra advent" 24)
