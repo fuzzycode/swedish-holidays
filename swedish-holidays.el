@@ -88,6 +88,22 @@
     (holiday-fixed 12 13 "Lucia"))
   "Extra days of interest in the Swedish calendar.")
 
+;;;###autoload
+(defvar swedish-holidays-solar-holidays
+  (mapcar 'purecopy
+  '((solar-equinoxes-solstices)
+    (holiday-sexp calendar-daylight-savings-starts
+                  (format "Sommartid börjar %s"
+                          (solar-time-string
+                           (/ calendar-daylight-savings-starts-time (float 60))
+                           calendar-standard-time-zone-name)))
+    (holiday-sexp calendar-daylight-savings-ends
+                  (format "Vintertid börjar %s"
+                          (solar-time-string
+                           (/ calendar-daylight-savings-ends-time (float 60))
+                           calendar-daylight-time-zone-name)))))
+  "A localized re-implementation of `holiday-solar-holidays'")
+
 (defun swedish-holidays-midsummer-nth (n name)
   "Date of Nth day after Swedish midsummer named NAME.
 Negative numbers will return days before midsummer."
@@ -123,6 +139,7 @@ This is a localized re-implementation of 'solar-sunrise-sunset-string`."
   (advice-add 'solar-sunrise-sunset-string :override #'swedish-holidays-solar-sunrise-sunset-string-a)
 
   (setq calendar-holidays (append swedish-holidays swedish-holidays-extras swedish-holidays-misc))
+  (setq holiday-solar-holidays swedish-holidays-solar-holidays)
 
   ;; Start the week on Monday
   (setq calendar-week-start-day 1)
