@@ -141,6 +141,12 @@ This is a localized re-implementation of 'solar-sunrise-sunset-string`."
   (setq calendar-holidays (append swedish-holidays swedish-holidays-extras swedish-holidays-misc))
   (setq holiday-solar-holidays swedish-holidays-solar-holidays)
 
+  ;; Clear holidays that do not apply
+  (setq holiday-hebrew-holidays nil
+        holiday-bahai-holidays nil
+        holiday-oriental-holidays nil
+        holiday-islamic-holidays nil)
+
   ;; Start the week on Monday
   (setq calendar-week-start-day 1)
 
