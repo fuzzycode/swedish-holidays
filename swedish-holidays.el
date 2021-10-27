@@ -114,10 +114,10 @@ Negative numbers will return days before midsummer."
 
 
 (defun swedish-holidays-solar-sunrise-sunset-string-a (date &optional nolocation)
-"String of *local* times of sunrise, sunset, and daylight on Gregorian DATE.
+  "String of *local* times of sunrise, sunset, and daylight on Gregorian DATE.
 Optional NOLOCATION non-nil means do not print the location.
 
-This is a localized re-implementation of 'solar-sunrise-sunset-string`."
+This is a localized re-implementation of `solar-sunrise-sunset-string'."
   (let ((l (solar-sunrise-sunset date)))
     (format
      "%s, %s%s (%s timmar dagsljus)"
