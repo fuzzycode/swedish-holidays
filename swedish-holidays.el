@@ -83,6 +83,21 @@
   "Swedish holidays, not considered bank holidays.")
 
 ;;;###autoload
+(defvar swedish-holidays-misc-holidays (mapcar 'purecopy '((holiday-fixed 1 28 "Konungens namnsdag")
+                                                           (holiday-fixed 2 2 "Kyndelsmässodagen")
+                                                           (holiday-fixed 3 8 "Internationella kvinnodagen")
+                                                           (holiday-fixed 3 12 "Kronprinsessans namnsdag")
+                                                           (holiday-fixed 3 25 "Vårfrudagen")
+                                                           (holiday-fixed 4 30 "Konungens födelsedag")
+                                                           (holiday-fixed 4 1 "Första april")
+                                                           (holiday-fixed 7 14 "Kronprinsessans födelsedag")
+                                                           (holiday-fixed 8 8 "Drottningens namnsdag")
+                                                           (holiday-fixed 11 6 "Gustaf Adolfsdagen")
+                                                           (holiday-fixed 11 19 "Internationella mansdagen")
+                                                           (holiday-fixed 12 23 "Drottningens födelsedag")))
+  "Swedish extra holidays.")
+
+;;;###autoload
 (defvar swedish-holidays-solar-holidays
   (mapcar 'purecopy
           '((solar-equinoxes-solstices)
@@ -134,8 +149,9 @@ This is a localized re-implementation of `solar-sunrise-sunset-string'."
      (nth 2 l))))
 
 ;;;###autoload
-(defun swedish-holidays-setup ()
-  "Setup Swedish localization for common date names and formats."
+(defun swedish-holidays-setup (&optional extras)
+  "Setup Swedish localization for common date names and formats.
+If EXTRAS is non nil, `swedish-holidays-misc-holidays' will be added to the list of holidays"
 
   ;; Use localized version of sunrise/sunset name string function
   (advice-add 'solar-sunrise-sunset-string :override #'swedish-holidays-solar-sunrise-sunset-string-a)
@@ -145,6 +161,10 @@ This is a localized re-implementation of `solar-sunrise-sunset-string'."
         holiday-local-holidays swedish-holidays-local-holidays
         holiday-other-holidays swedish-holidays-other-holidays
         calendar-holidays (append swedish-holidays-christian-holidays swedish-holidays-local-holidays swedish-holidays-other-holidays))
+
+  (when extras
+    (setq calendar-holidays (append calendar-holidays swedish-holidays-misc-holidays))
+    (setq holiday-other-holidays (append holiday-other-holidays swedish-holidays-misc-holidays)))
 
   ;; Clear holidays that do not apply
   (setq holiday-hebrew-holidays nil
