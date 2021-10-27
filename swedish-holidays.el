@@ -58,9 +58,9 @@
 (defvar swedish-holidays-local-holidays (mapcar 'purecopy '((holiday-fixed 1 1 "Nyårsdagen")
                                                             (holiday-fixed 5 1 "Första Maj")
                                                             (holiday-fixed 6 6 "Sveriges Nationaldag")
-                                                            (swedish-holidays-midsummer-nth -1 "Midsommarafton")
-                                                            (swedish-holidays-midsummer-nth 0 "Midsommardagen")
-                                                            (swedish-holidays-alla-helgona-nth 0 "Alla helgons dag")
+                                                            (swedish-holidays--midsummer-nth -1 "Midsommarafton")
+                                                            (swedish-holidays--midsummer-nth 0 "Midsommardagen")
+                                                            (swedish-holidays--alla-helgona-nth 0 "Alla helgons dag")
                                                             (holiday-fixed 12 31 "Nyårsafton")))
   "Swedish local bank holidays.")
 
@@ -73,7 +73,7 @@
                                                             (holiday-fixed 4 30 "Valborgsmässoafton")
                                                             (holiday-fixed 10 24 "FN-dagen")
                                                             (holiday-float 11 0 2 "Fars dag")
-                                                            (swedish-holidays-alla-helgona-nth -1 "Allhelgonaafton")
+                                                            (swedish-holidays--alla-helgona-nth -1 "Allhelgonaafton")
                                                             (holiday-float 12 0 -4 "Första advent" 24)
                                                             (holiday-float 12 0 -3 "Andra advent" 24)
                                                             (holiday-float 12 0 -2 "Tredje advent" 24)
@@ -98,7 +98,7 @@
                                    calendar-daylight-time-zone-name)))))
   "A localized re-implementation of `holiday-solar-holidays'.")
 
-(defun swedish-holidays-midsummer-nth (n name)
+(defun swedish-holidays--midsummer-nth (n name)
   "Date of Nth day after Swedish midsummer named NAME.
 Negative numbers will return days before midsummer."
   (let* ((midsommar-d (calendar-dayname-on-or-before
@@ -107,7 +107,7 @@ Negative numbers will return days before midsummer."
          (date (calendar-gregorian-from-absolute (+ n midsommar-d))))
     (holiday-fixed (car date) (cadr date) name)))
 
-(defun swedish-holidays-alla-helgona-nth (n name)
+(defun swedish-holidays--alla-helgona-nth (n name)
   "Date of Nth day after Swedish 'Alla helgons dag' named NAME.
 Negative numbers will return days before 'Alla helgons dag'."
   (let ((date (calendar-gregorian-from-absolute
