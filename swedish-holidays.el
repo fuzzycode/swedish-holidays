@@ -41,76 +41,78 @@
   (require 'holidays))
 
 ;;;###autoload
-(defvar swedish-holidays
-  '((holiday-fixed 1 1 "Nyårsdagen")
-    (holiday-fixed 1 6 "Trettondedag Jul")
-    (holiday-fixed 5 1 "Första Maj")
-
-    (holiday-easter-etc -2 "Långfredagen")
-    (holiday-easter-etc 0 "Påskdagen")
-    (holiday-easter-etc 1 "Annandag Påsk")
-    (holiday-easter-etc 39 "Kristi Himmelfärdsdagen")
-    (holiday-easter-etc 49 "Pingstdagen")
-
-    (holiday-fixed 6 6 "Sveriges Nationaldag")
-    (swedish-holidays-midsummer-nth 0 "Midsommardagen")
-    (holiday-fixed 12 24 "Julafton")
-    (holiday-fixed 12 25 "Juldagen")
-    (holiday-fixed 12 26 "Annandag Jul")
-    (holiday-fixed 12 31 "Nyårsafton"))
-  "Official holidays in Sweden.")
+(defvar swedish-holidays-christian-holidays (mapcar 'purecopy '((holiday-fixed 1 6 "Trettondedag Jul")
+                                                                (holiday-easter-etc -2 "Långfredagen")
+                                                                (holiday-easter-etc 0 "Påskdagen")
+                                                                (holiday-easter-etc 1 "Annandag Påsk")
+                                                                (holiday-easter-etc 39 "Kristi Himmelfärdsdagen")
+                                                                (holiday-fixed 12 24 "Julafton")
+                                                                (holiday-fixed 12 25 "Juldagen")
+                                                                (holiday-fixed 12 26 "Annandag Jul")
+                                                                (holiday-easter-etc -1 "Påskafton")
+                                                                (holiday-easter-etc 48 "Pingstafton")
+                                                                (holiday-easter-etc 49 "Pingstdagen")))
+  "Swedish christian holidays.")
 
 ;;;###autoload
-(defvar swedish-holidays-extras
-  '((holiday-fixed 1 5 "Trettondagsafton")
-
-    (holiday-easter-etc -1 "Påskafton")
-    (holiday-easter-etc 48 "Pingstafton")
-
-    (swedish-holidays-midsummer-nth -1 "Midsommarafton")
-
-    (holiday-fixed 4 30 "Valborgsmässoafton"))
-  "Extra holidays in Sweden.")
+(defvar swedish-holidays-local-holidays (mapcar 'purecopy '((holiday-fixed 1 1 "Nyårsdagen")
+                                                            (holiday-fixed 5 1 "Första Maj")
+                                                            (holiday-fixed 6 6 "Sveriges Nationaldag")
+                                                            (swedish-holidays-midsummer-nth -1 "Midsommarafton")
+                                                            (swedish-holidays-midsummer-nth 0 "Midsommardagen")
+                                                            (swedish-holidays-alla-helgona-nth 0 "Alla helgons dag")
+                                                            (holiday-fixed 12 31 "Nyårsafton")))
+  "Swedish local bank holidays.")
 
 ;;;###autoload
-(defvar swedish-holidays-misc
-  '((holiday-fixed 1 13 "Tjugondag Knut")
-    (holiday-float 5 0 -1 "Mors dag")
-    (holiday-float 11 0 2 "Fars dag")
-    (holiday-fixed 2 14 "Alla hjärtans dag")
-    (holiday-easter-etc -47 "Fettisdagen")
-    (holiday-fixed 10 24 "FN-dagen")
-    (holiday-float 12 0 -4 "Första advent" 24)
-    (holiday-float 12 0 -3 "Andra advent" 24)
-    (holiday-float 12 0 -2 "Tredje advent" 24)
-    (holiday-float 12 0 -1 "Fjärde advent" 24)
-    (holiday-fixed 12 10 "Nobeldagen")
-    (holiday-fixed 12 13 "Lucia"))
-  "Extra days of interest in the Swedish calendar.")
+(defvar swedish-holidays-other-holidays (mapcar 'purecopy '((holiday-fixed 1 5 "Trettondagsafton")
+                                                            (holiday-fixed 1 13 "Tjugondag Knut")
+                                                            (holiday-float 5 0 -1 "Mors dag")
+                                                            (holiday-fixed 2 14 "Alla hjärtans dag")
+                                                            (holiday-easter-etc -47 "Fettisdagen")
+                                                            (holiday-fixed 4 30 "Valborgsmässoafton")
+                                                            (holiday-fixed 10 24 "FN-dagen")
+                                                            (holiday-float 11 0 2 "Fars dag")
+                                                            (swedish-holidays-alla-helgona-nth -1 "Allhelgonaafton")
+                                                            (holiday-float 12 0 -4 "Första advent" 24)
+                                                            (holiday-float 12 0 -3 "Andra advent" 24)
+                                                            (holiday-float 12 0 -2 "Tredje advent" 24)
+                                                            (holiday-float 12 0 -1 "Fjärde advent" 24)
+                                                            (holiday-fixed 12 10 "Nobeldagen")
+                                                            (holiday-fixed 12 13 "Lucia")))
+  "Swedish holidays, not considered bank holidays.")
 
 ;;;###autoload
 (defvar swedish-holidays-solar-holidays
   (mapcar 'purecopy
-  '((solar-equinoxes-solstices)
-    (holiday-sexp calendar-daylight-savings-starts
-                  (format "Sommartid börjar %s"
-                          (solar-time-string
-                           (/ calendar-daylight-savings-starts-time (float 60))
-                           calendar-standard-time-zone-name)))
-    (holiday-sexp calendar-daylight-savings-ends
-                  (format "Vintertid börjar %s"
-                          (solar-time-string
-                           (/ calendar-daylight-savings-ends-time (float 60))
-                           calendar-daylight-time-zone-name)))))
-  "A localized re-implementation of `holiday-solar-holidays'")
+          '((solar-equinoxes-solstices)
+            (holiday-sexp calendar-daylight-savings-starts
+                          (format "Sommartid börjar %s"
+                                  (solar-time-string
+                                   (/ calendar-daylight-savings-starts-time (float 60))
+                                   calendar-standard-time-zone-name)))
+            (holiday-sexp calendar-daylight-savings-ends
+                          (format "Vintertid börjar %s"
+                                  (solar-time-string
+                                   (/ calendar-daylight-savings-ends-time (float 60))
+                                   calendar-daylight-time-zone-name)))))
+  "A localized re-implementation of `holiday-solar-holidays'.")
 
 (defun swedish-holidays-midsummer-nth (n name)
   "Date of Nth day after Swedish midsummer named NAME.
 Negative numbers will return days before midsummer."
-  (let ((midsommar-d (calendar-dayname-on-or-before
-                      6 (calendar-absolute-from-gregorian
-                         (list 6 26 displayed-year)))))
-    (list (list (calendar-gregorian-from-absolute (+ midsommar-d n)) name))))
+  (let* ((midsommar-d (calendar-dayname-on-or-before
+                       6 (calendar-absolute-from-gregorian
+                          (list 6 26 displayed-year))))
+         (date (calendar-gregorian-from-absolute (+ n midsommar-d))))
+    (holiday-fixed (car date) (cadr date) name)))
+
+(defun swedish-holidays-alla-helgona-nth (n name)
+  "Date of Nth day after Swedish 'Alla helgons dag' named NAME.
+Negative numbers will return days before 'Alla helgons dag'."
+  (let ((date (calendar-gregorian-from-absolute
+               (+ n (calendar-dayname-on-or-before 6 (calendar-absolute-from-gregorian (list 11 6 displayed-year)))))))
+    (holiday-fixed (car date) (cadr date) name)))
 
 
 (defun swedish-holidays-solar-sunrise-sunset-string-a (date &optional nolocation)
@@ -138,8 +140,11 @@ This is a localized re-implementation of `solar-sunrise-sunset-string'."
   ;; Use localized version of sunrise/sunset name string function
   (advice-add 'solar-sunrise-sunset-string :override #'swedish-holidays-solar-sunrise-sunset-string-a)
 
-  (setq calendar-holidays (append swedish-holidays swedish-holidays-extras swedish-holidays-misc))
-  (setq holiday-solar-holidays swedish-holidays-solar-holidays)
+  (setq holiday-solar-holidays swedish-holidays-solar-holidays
+        holiday-christian-holidays swedish-holidays-christian-holidays
+        holiday-local-holidays swedish-holidays-local-holidays
+        holiday-other-holidays swedish-holidays-other-holidays
+        calendar-holidays (append swedish-holidays-christian-holidays swedish-holidays-local-holidays swedish-holidays-other-holidays))
 
   ;; Clear holidays that do not apply
   (setq holiday-hebrew-holidays nil
