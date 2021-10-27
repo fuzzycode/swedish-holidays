@@ -1,3 +1,18 @@
 #+title:     README
 #+author:    Björn Larsson
 #+email:     develop@bjornlarsson.net
+
+* About
+* Installation
+** Doom Emacs
+TODO Write me.
+
+* License
+This package is released under the [[file:LICENSE][GPL v3]] License.
+
+* Thanks
+This packages has been inspired by and borrowed code from the following pre existing packages. Huge thanks to their respective maintainers.
+
++ [[http://bigwalter.net/daniel/elisp/sv-kalender.el][sv-kalender.el]]
++ [[https://github.com/grafov/russian-holidays][russian-holidays]]
++ [[https://github.com/egli/swiss-holidays][swiss-holidays]]
